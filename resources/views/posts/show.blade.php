@@ -1,6 +1,8 @@
 @extends('layout')
 
 @section('content')
+<x-app-layout>
+<x-slot name="header">
     <div class="container mt-4">
         <div class="border p-4">
             <div class="mb-4 text-right">
@@ -21,6 +23,10 @@
             <h1 class="h5 mb-4">
                 {{ $post->title }}
             </h1>
+
+            <a> {{-- href="{{ url('users/' . $post->user->id) }}"> --}}
+                {{ $post->user->name }}
+            </a>
 
             <p class="mb-5">
                 {!! nl2br(e($post->body)) !!}
@@ -68,6 +74,16 @@
                         <time class="text-secondary">
                             {{ $comment->created_at->format('Y.m.d H:i') }}
                         </time>
+                        <p>{{ $comment->user->name }}</p>
+                        <form
+                            style="display: inline-block;"
+                            method="POST"
+                            action="{{ route('comments.destroy', ['comment' => $comment]) }}"
+                        >
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger">削除する</button>
+                        </form>
                         <p class="mt-2">
                             {!! nl2br(e($comment->body)) !!}
                         </p>
@@ -78,4 +94,6 @@
             </section>
         </div>
     </div>
+</x-slot>
+</x-app-layout>
 @endsection

@@ -1,6 +1,8 @@
 @extends('layout')
 
 @section('content')
+<x-app-layout>
+<x-slot name="header">
     <div class="container mt-4">
         <div class="border p-4">
             <h1 class="h5 mb-4">
@@ -60,4 +62,6 @@
             </form>
         </div>
     </div>
+</x-slot>
+</x-app-layout>
 @endsection

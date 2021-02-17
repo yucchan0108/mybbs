@@ -23,6 +23,7 @@ class PostsTableSeeder extends Seeder
                 $comments = factory(Comment::class, 2)->create();
                 $post->comments()->saveMany($comments);
             }
+            // 'user_id' => $faker->numberBetween(1, 20),
         );
     }
 }

@@ -3,15 +3,19 @@
 @section('content') 
     <div class="container mt-4">
         <div class="mb-4">
+            <p class="auth_myname">{{ Auth::user()->name }} さん、こんにちは！</p>
             <a href="{{ route('posts.create') }}" class="btn btn-primary">
                 投稿を新規作成する
             </a>
         </div>
-        @foreach ($posts as $post)
+     @foreach ($posts as $post)
             <div class="card mb-4">
                 <div class="card-header">
                     {{ $post->title }}
                 </div>
+                <a> {{-- href="{{ url('users/' . $post->user->id) }}"--}}
+                    {{ $post->user->name }}
+                </a>
                 <div class="card-body">
                     <p class="card-text">
                         {!! nl2br(e(Str::limit($post->body, 200))) !!}
@@ -36,6 +40,6 @@
         
     </div>
     <div class="d-flex justify-content-center mb-5">
-        {{ $posts->links() }}
+        {{ $posts ->links() }}
     </div>
 @endsection
